@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-function UploadSection() {
+function UploadSection({ onImageChange }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -10,13 +10,16 @@ function UploadSection() {
       const reader = new FileReader();
       reader.onloadend = () => {
         setSelectedImage(reader.result);
+        onImageChange(true); // Notify parent that an image has been selected
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleRemoveImage = () => {
+  const handleRemoveImage = (event) => {
+    event.stopPropagation(); // Prevents triggering any parent handlers
     setSelectedImage(null);
+    onImageChange(false); // Notify parent that the image has been removed
   };
 
   const triggerFileInput = () => {
@@ -26,7 +29,7 @@ function UploadSection() {
   return (
     <div className="flex flex-col justify-center items-center px-20 py-6 mt-9 max-w-full font-light rounded-xl border border-emerald-400 border-dashed bg-slate-600 bg-opacity-10 text-stone-200 w-[793px] max-md:px-5 relative">
       <div className="flex flex-col items-center max-w-full relative">
-        <h2 className="text-4xl mb-6 text-center">Drag Files to Upload or Browse</h2>
+        <h2 className="text-4xl mb-6 text-center">Drag Files to Upload or Browse*</h2>
         <div className="relative flex flex-col items-center">
           {selectedImage ? (
             <div className="relative">

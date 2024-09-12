@@ -33,10 +33,11 @@ function OptionGroup({ title, options, isRequired, onChange, selectedOption }) {
         ))}
       </div>
       {isRequired && !selectedOption && (
-        <p className="text-red-500 mt-2">This field is required.</p>
+        console.log("This field is required.")
       )}
     </fieldset>
   );
 }
 
 export default OptionGroup;
+

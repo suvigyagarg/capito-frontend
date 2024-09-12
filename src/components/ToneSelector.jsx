@@ -29,8 +29,9 @@ function ToneSelector() {
         {tones.map((tone, index) => (
           <button
             key={index}
-            className={`gap-2.5 self-stretch px-6 py-1 text-lg font-semibold leading-none rounded-3xl border-2 min-h-[31px] max-md:px-5 transition duration-300
-              ${selectedTone === tone.name 
+            type="button" // Prevent form submission and page refresh
+            className={`gap-2.5 self-stretch px-6 py-2 text-lg font-semibold leading-none rounded-3xl border-2 min-h-[31px] max-md:px-5 transition duration-300
+              ${selectedTone === tone.name
                 ? `${tone.fillColor} ${tone.textColor}` // Filled when selected
                 : `border-${tone.fillColor.replace('bg-', '')} text-white hover:${tone.fillColor} hover:${tone.textColor} bg-transparent` // Hollow when not selected
               }`}
